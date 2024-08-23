@@ -10,12 +10,14 @@ const Controls = ({ ctrls, setCtrls }) => {
     const rect = ctrlRef.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     const offsetY = e.clientY - rect.top;
+   
 
     const handleMouseMove = (e) => {
       const newX = e.clientX - offsetX;
       const newY = e.clientY - offsetY;
       ctrlRef.style.left = `${newX}px`;
       ctrlRef.style.top = `${newY}px`;
+      
     };
 
     const handleMouseUp = (e) => {
@@ -73,6 +75,7 @@ const Controls = ({ ctrls, setCtrls }) => {
       if (ctrl.id === id || ctrlRefs.current[id].current.focus) {
         selectedRef.current = ctrlRefs.current[id].current;
         ctrlRefs.current[id].current.className = 'selected';
+        ctrlRefs.current[id].current.cursor = 'vertical-text';
       }
       return null;
     });
@@ -81,8 +84,10 @@ const Controls = ({ ctrls, setCtrls }) => {
     selectedRef.current.style.color = e.target.value;
   };
   const handleFont = (e) => {
-    console.log(e.target.value);
     selectedRef.current.style.fontFamily = `'${e.target.value}'`;
+  };
+  const handleSize = (e) => {
+    selectedRef.current.style.fontSize = `${e.target.value}px`;
   };
   return (
     <>
@@ -117,6 +122,21 @@ const Controls = ({ ctrls, setCtrls }) => {
             <option value="arial">arial</option>
           </select>
         </p>
+        <p>
+          <span style={{ padding: '0 5px', color: '#000' }}>Size</span>
+          <select
+            onChange={(e) => {
+              handleSize(e);
+            }}
+          >
+            <option value="12">12</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="42">42</option>
+          </select>
+        </p>
+
         <p>
           <span style={{ padding: '0 5px', color: '#000' }}>Color</span>
 

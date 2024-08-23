@@ -52,3 +52,7 @@ code {
   background-color: #000;
   color: bisque;
 }
+.cursor {
+  cursor: pointer;
+}
+
